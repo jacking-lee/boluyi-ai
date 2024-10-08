@@ -1,1 +1,31 @@
-
+// popup.html - Popup for Extension Button (Optional)
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>布鲁伊助手</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      width: 200px;
+    }
+    #activate {
+      padding: 10px;
+      background: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>布鲁伊助手</h2>
+  <button id="activate">激活助手</button>
+  <script>
+    document.getElementById('activate').addEventListener('click', () => {
+      alert('布鲁伊助手已激活！');
+    });
+  </script>
+</body>
+</html>
