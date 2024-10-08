@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>浮动数字人 - 布鲁伊</title>
+  <style>
+    /* Styling for the Floating Digital Human */
+    #digital-human {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid #2196F3;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      max-width: 200px;
+      text-align: center;
+      z-index: 9999;
+    }
+
+    #character-image {
+      width: 100px;
+      border-radius: 50%;
+    }
+
+    #chat-box {
+      margin-top: 10px;
+      background: #e3f2fd;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    #voice-button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      background: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #voice-button:hover {
+      background: #1976D2;
+    }
+  </style>
+</head>
+<body>
+  <div id="digital-human">
+    <img id="character-image" src="boluyi.png" alt="布鲁伊" />
+    <div id="chat-box">
+      <p id="output-text">你好，我是布鲁伊，可以帮你做什么呢？</p>
+    </div>
+    <button id="voice-button">🎙️ 语音输入</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 处理语音按钮点击
+      document.getElementById("voice-button").addEventListener("click", () => {
+        let userText = prompt("请告诉布鲁伊你想做什么：");
+        if (userText) {
+          handleCommand(userText);
+        }
+      });
+
+      // 命令处理函数
+      function handleCommand(command) {
+        let response = "抱歉，我不太理解你说的是什么。";
+
+        if (command.includes("打开谷歌")) {
+          response = "正在帮你打开谷歌。";
+          window.open("https://www.google.com", "_blank");
+        } else if (command.includes("告诉我关于布鲁伊的故事")) {
+          response = "布鲁伊是一只六岁的蓝色澳大利亚牧牛犬，她喜欢冒险和和家人一起玩耍。";
+        }
+
+        document.getElementById("output-text").innerText = response;
+      }
+    });
+  </script>
+</body>
+</html>
