@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   digitalHumanContainer.id = "digital-human";
 
   digitalHumanContainer.innerHTML = `
-    <img id="character-image" src="${chrome.runtime.getURL("bluey.png")}" alt="布鲁伊" />
+    <img id="character-image" src="${chrome.runtime.getURL("buloyi.png")}" alt="布鲁伊" />
     <div id="chat-box">
       <p id="output-text">你好，我是布鲁伊，可以帮你做什么呢？</p>
     </div>
