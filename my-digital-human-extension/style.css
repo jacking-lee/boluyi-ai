@@ -1,1 +1,40 @@
+// style.css - Styling for the Floating Digital Human
+#digital-human {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #2196F3;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  max-width: 200px;
+  text-align: center;
+  z-index: 9999;
+}
 
+#character-image {
+  width: 100px;
+  border-radius: 50%;
+}
+
+#chat-box {
+  margin-top: 10px;
+  background: #e3f2fd;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#voice-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#voice-button:hover {
+  background: #1976D2;
+}
