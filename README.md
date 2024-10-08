@@ -7,8 +7,8 @@ my-digital-human-extension/
   ├── popup.html         # 弹出窗口的HTML（可选）
   ├── README.md          # 项目介绍文档
   ├── LICENSE            # 许可证（例如MIT License）
-  ├── icon.png           # 扩展程序图标
-  └── bluey.png          # 数字人图像
+  ├── buluyi-1.png           # 扩展程序图标
+  └── boluyi.png          # 数字人图像
 # Floating Digital Human - Bluey
 
 这是一个可以在浏览器中浮动的数字人扩展程序，基于布鲁伊家庭的角色实现。它可以帮助用户通过简单的交互在浏览器中管理页面、执行命令等。
