@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     padding: '10px 20px',
     borderRadius: '10px',
     fontSize: '12px',    
-    maxWidth: '300px' // Updated to increase chat box width
+    maxWidth: '400px' // Updated to increase chat box width to display at least 10 characters per line
   });
 
   const voiceButton = document.getElementById("voice-button");
@@ -65,9 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (characterPosition < characterOffset) {
       characterImage.style.transform = "scaleX(1)";
       setElementStyles(chatBox, {
-        left: `${characterWidth + 20}px`, // Adjusted to ensure chat box is positioned to the right of character
+        left: `${characterWidth + 40}px`, // Adjusted to ensure chat box is positioned to the right of character
         transform: 'translateX(0)',
-        maxWidth: '300px' // Ensure chat box width is consistent
+        maxWidth: '400px' // Ensure chat box width is consistent
       });
       setElementStyles(voiceButton, {
         left: `${characterWidth * 0.3}px` // Position microphone in front of character
@@ -75,10 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       characterImage.style.transform = "scaleX(-1)";
       setElementStyles(chatBox, {
-        right: `${characterWidth + 20}px`, // Adjusted to ensure chat box is positioned to the left of character
+        right: `${characterWidth + 40}px`, // Adjusted to ensure chat box is positioned to the left of character
         left: 'auto',
         transform: 'translateX(0)',
-        maxWidth: '300px' // Ensure chat box width is consistent
+        maxWidth: '400px' // Ensure chat box width is consistent
       });
       setElementStyles(voiceButton, {
         right: `${characterWidth * 0.3}px`, // Position microphone in front of character
@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
       padding: '10px 20px',
       borderRadius: '10px',
       fontSize: '12px',
-      maxWidth: '300px' // Updated to increase chat box width
+      maxWidth: '400px' // Updated to increase chat box width to display at least 10 characters per line
     });
     userChatBox.innerText = text;
     chatBox.parentNode.insertBefore(userChatBox, chatBox);
