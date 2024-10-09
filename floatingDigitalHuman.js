@@ -27,19 +27,19 @@ document.addEventListener("DOMContentLoaded", () => {
     left: '50%',
     transform: 'translateX(-50%)',
     background: '#e3f2fd',
-    padding: '10px 20px',
+    padding: '15px 30px',
     borderRadius: '10px',
-    fontSize: '12px',    
-    maxWidth: '400px' // Updated to increase chat box width to display at least 10 characters per line
+    fontSize: '14px',    
+    maxWidth: '500px' // Updated to significantly increase chat box width
   });
 
   const voiceButton = document.getElementById("voice-button");
   setElementStyles(voiceButton, {
-    width: '40px',
-    height: '40px',
+    width: '50px',
+    height: '50px',
     position: 'absolute',
-    bottom: '10px',
-    left: '30%', // Updated to position microphone more accurately relative to character
+    bottom: '20px',
+    left: '40%', // Updated to position microphone more accurately relative to character
     cursor: 'pointer'
   });
 
@@ -65,23 +65,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (characterPosition < characterOffset) {
       characterImage.style.transform = "scaleX(1)";
       setElementStyles(chatBox, {
-        left: `${characterWidth + 40}px`, // Adjusted to ensure chat box is positioned to the right of character
+        left: `${characterWidth + 50}px`, // Adjusted to ensure chat box is positioned to the right of character
         transform: 'translateX(0)',
-        maxWidth: '400px' // Ensure chat box width is consistent
+        maxWidth: '500px' // Ensure chat box width is consistent
       });
       setElementStyles(voiceButton, {
-        left: `${characterWidth * 0.3}px` // Position microphone in front of character
+        left: `${characterWidth * 0.5}px` // Position microphone in front of character
       });
     } else {
       characterImage.style.transform = "scaleX(-1)";
       setElementStyles(chatBox, {
-        right: `${characterWidth + 40}px`, // Adjusted to ensure chat box is positioned to the left of character
+        right: `${characterWidth + 50}px`, // Adjusted to ensure chat box is positioned to the left of character
         left: 'auto',
         transform: 'translateX(0)',
-        maxWidth: '400px' // Ensure chat box width is consistent
+        maxWidth: '500px' // Ensure chat box width is consistent
       });
       setElementStyles(voiceButton, {
-        right: `${characterWidth * 0.3}px`, // Position microphone in front of character
+        right: `${characterWidth * 0.5}px`, // Position microphone in front of character
         left: 'auto'
       });
     }
@@ -174,10 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
       left: '50%',
       transform: 'translateX(-50%)',
       background: '#ffe4e1', // Changed to light pink for user chat box
-      padding: '10px 20px',
+      padding: '15px 30px',
       borderRadius: '10px',
-      fontSize: '12px',
-      maxWidth: '400px' // Updated to increase chat box width to display at least 10 characters per line
+      fontSize: '14px',
+      maxWidth: '500px' // Updated to significantly increase chat box width
     });
     userChatBox.innerText = text;
     chatBox.parentNode.insertBefore(userChatBox, chatBox);
