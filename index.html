@@ -27,9 +27,18 @@
     #chat-box {
       position: absolute;
       top: -60px;
+      right: 40px; /* 调整位置，避免遮挡布鲁伊 */
+      background: #e3f2fd;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    #user-chat-box {
+      position: absolute;
+      top: -120px; /* 用户的对话框在布鲁伊的对话框上方 */
       left: 50%;
       transform: translateX(-50%);
-      background: #e3f2fd;
+      background: #fff3e0;
       padding: 10px;
       border-radius: 10px;
     }
@@ -52,6 +61,9 @@
 </head>
 <body>
   <div id="digital-human">
+    <div id="user-chat-box">
+      <p id="user-text"></p>
+    </div>
     <img id="character-image" src="boluyi.png" alt="Boluyi" />
     <div id="chat-box">
       <p id="output-text">你好，我是布鲁伊，可以帮你做什么呢？</p>
