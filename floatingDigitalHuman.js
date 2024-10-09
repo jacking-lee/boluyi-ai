@@ -37,9 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
     width: '40px',
     height: '40px',
     position: 'absolute',
-    bottom: '0',
-    left: '50%',
-    transform: 'translateX(-50%)',
+    bottom: '10px',
+    left: '10px',
     cursor: 'pointer'
   });
 
@@ -150,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     userChatBox.classList.add('user-chat-box');
     setElementStyles(userChatBox, {
       position: 'absolute',
-      top: '-100px',
+      top: '-50px',
       left: '110%',
       background: '#ffe4e1', // Changed to light pink for user chat box
       padding: '5px 10px',
