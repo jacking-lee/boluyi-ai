@@ -27,10 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
     left: '50%',
     transform: 'translateX(-50%)',
     background: '#e3f2fd',
-    padding: '5px 10px',
+    padding: '10px 20px',
     borderRadius: '10px',
     fontSize: '12px',    
-    maxWidth: '200px'
+    maxWidth: '300px' // Updated to increase chat box width
   });
 
   const voiceButton = document.getElementById("voice-button");
@@ -66,7 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
       characterImage.style.transform = "scaleX(1)";
       setElementStyles(chatBox, {
         left: `${characterWidth + 20}px`, // Adjusted to ensure chat box is positioned to the right of character
-        transform: 'translateX(0)'
+        transform: 'translateX(0)',
+        maxWidth: '300px' // Ensure chat box width is consistent
       });
       setElementStyles(voiceButton, {
         left: `${characterWidth * 0.3}px` // Position microphone in front of character
@@ -76,7 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
       setElementStyles(chatBox, {
         right: `${characterWidth + 20}px`, // Adjusted to ensure chat box is positioned to the left of character
         left: 'auto',
-        transform: 'translateX(0)'
+        transform: 'translateX(0)',
+        maxWidth: '300px' // Ensure chat box width is consistent
       });
       setElementStyles(voiceButton, {
         right: `${characterWidth * 0.3}px`, // Position microphone in front of character
@@ -172,10 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
       left: '50%',
       transform: 'translateX(-50%)',
       background: '#ffe4e1', // Changed to light pink for user chat box
-      padding: '5px 10px',
+      padding: '10px 20px',
       borderRadius: '10px',
       fontSize: '12px',
-      maxWidth: '150px'
+      maxWidth: '300px' // Updated to increase chat box width
     });
     userChatBox.innerText = text;
     chatBox.parentNode.insertBefore(userChatBox, chatBox);
