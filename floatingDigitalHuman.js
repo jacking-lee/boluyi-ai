@@ -62,20 +62,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (characterPosition < window.innerWidth / 2) {
       characterImage.style.transform = "scaleX(1)";
       setElementStyles(chatBox, {
-        left: '60%',
-        transform: 'translateX(-70%)'
+        left: 'calc(50% + 40px)',
+        transform: 'translateX(0)'
       });
       setElementStyles(voiceButton, {
-        left: '20%'
+        left: '10%'
       });
     } else {
       characterImage.style.transform = "scaleX(-1)";
       setElementStyles(chatBox, {
-        left: '-10%',
-        transform: 'translateX(-30%)'
+        left: 'calc(50% - 40px)',
+        transform: 'translateX(-100%)'
       });
       setElementStyles(voiceButton, {
-        left: '-20%'
+        left: '80%'
       });
     }
   };
