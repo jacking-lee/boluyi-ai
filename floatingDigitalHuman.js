@@ -17,7 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     cursor: 'grab',
     boxShadow: 'none',
     right: '20px',
-    bottom: '20px'
+    bottom: '20px',
+    position: 'fixed'
   });
   
   digitalHuman.style.cursor = 'grab';
@@ -47,8 +48,7 @@ setElementStyles(voiceButton, {
     cursor: 'pointer',
     marginTop: '10px'
   });
-  const speakerIcon = document.getElementById("speaker-icon");
-  speakerIcon.remove();
+  // Speaker icon removed as it's no longer used.
       speakerIcon.style.height = '30px';
       speakerIcon.style.marginTop = '5px';
   let isActive = false;
@@ -71,10 +71,10 @@ setElementStyles(voiceButton, {
     if (characterPosition < window.innerWidth / 2) {
       characterImage.style.transform = "scaleX(1)";
       chatBox.style.left = '0';
-      voiceButton.style.left = '-30px';
+      voiceButton.style.left = '20px';
     } else {
       characterImage.style.transform = "scaleX(-1)";
-      chatBox.style.left = '-150px';
+      chatBox.style.left = '20px';
       voiceButton.style.left = '70px';
     }
 };
@@ -130,13 +130,15 @@ setElementStyles(voiceButton, {
   function onMouseMove(e) {
     const newX = e.clientX - offsetX;
     const newY = e.clientY - offsetY;
-    updateElementPositions(newX, newY);
+    digitalHuman.style.left = `${newX}px`;
+    digitalHuman.style.top = `${newY}px`;
   }
 
   function onTouchMove(e) {
     const newX = e.touches[0].clientX - offsetX;
     const newY = e.touches[0].clientY - offsetY;
-    updateElementPositions(newX, newY);
+    digitalHuman.style.left = `${newX}px`;
+    digitalHuman.style.top = `${newY}px`;
   }
 
   function updateElementPositions(newX, newY) {
