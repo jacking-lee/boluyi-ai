@@ -23,8 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatBox = document.getElementById("chat-box");
   setElementStyles(chatBox, {
     position: 'absolute',
-    top: '-70px',
-    left: '110%',
+    top: '-90px',
+    left: '50%',
+    transform: 'translateX(-50%)',
     background: '#e3f2fd',
     padding: '5px 10px',
     borderRadius: '10px',
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     height: '40px',
     position: 'absolute',
     bottom: '10px',
-    left: '10px',
+    left: '-50px',
     cursor: 'pointer'
   });
 
@@ -60,10 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const characterPosition = digitalHuman.getBoundingClientRect().left + digitalHuman.offsetWidth / 2;
     if (characterPosition < window.innerWidth / 2) {
       characterImage.style.transform = "scaleX(1)";
-      chatBox.style.left = '110%';
+      chatBox.style.left = '50%';
     } else {
       characterImage.style.transform = "scaleX(-1)";
-      chatBox.style.left = '-110%';
+      chatBox.style.left = '50%';
     }
   };
 
@@ -149,8 +150,9 @@ document.addEventListener("DOMContentLoaded", () => {
     userChatBox.classList.add('user-chat-box');
     setElementStyles(userChatBox, {
       position: 'absolute',
-      top: '-50px',
-      left: '110%',
+      top: '-130px',
+      left: '50%',
+      transform: 'translateX(-50%)',
       background: '#ffe4e1', // Changed to light pink for user chat box
       padding: '5px 10px',
       borderRadius: '10px',
