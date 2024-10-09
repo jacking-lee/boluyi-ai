@@ -5,8 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     height: 'auto',
     borderRadius: '0'
   });
-  
-      characterImage.style.borderRadius = '0';
+
   const digitalHuman = document.getElementById("digital-human");
   setElementStyles(digitalHuman, {
     width: 'fit-content',
@@ -20,37 +19,30 @@ document.addEventListener("DOMContentLoaded", () => {
     bottom: '20px',
     position: 'fixed'
   });
-  
-  digitalHuman.style.cursor = 'grab';
-      digitalHuman.style.padding = '0';
-      digitalHuman.style.boxShadow = 'none';
-      digitalHuman.style.right = '20px';
-      digitalHuman.style.bottom = '20px';
+
   const chatBox = document.getElementById("chat-box");
   setElementStyles(chatBox, {
     position: 'absolute',
     top: '-70px',
-    left: '100%',
+    left: '110%',
     background: '#e3f2fd',
     padding: '5px 10px',
     borderRadius: '10px',
     fontSize: '12px',
     maxWidth: '200px'
   });
+
   const voiceButton = document.getElementById("voice-button");
-setElementStyles(voiceButton, {
+  setElementStyles(voiceButton, {
     width: '40px',
     height: '40px',
     position: 'absolute',
-    top: '0',
-    left: '100%',
-    transform: 'translateX(20%)',
-    cursor: 'pointer',
-    marginTop: '10px'
+    bottom: '-50px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    cursor: 'pointer'
   });
-  // Speaker icon removed as it's no longer used.
-      speakerIcon.style.height = '30px';
-      speakerIcon.style.marginTop = '5px';
+
   let isActive = false;
   let isVoiceOn = false;
   let isMuted = false;
@@ -65,19 +57,16 @@ setElementStyles(voiceButton, {
   }, 1000);
 
   // Update character direction based on screen center
-  const screenCenterX = window.innerWidth / 2;
   const updateCharacterDirection = () => {
     const characterPosition = digitalHuman.getBoundingClientRect().left + digitalHuman.offsetWidth / 2;
     if (characterPosition < window.innerWidth / 2) {
       characterImage.style.transform = "scaleX(1)";
-      chatBox.style.left = '0';
-      voiceButton.style.left = '20px';
+      chatBox.style.left = '110%';
     } else {
       characterImage.style.transform = "scaleX(-1)";
-      chatBox.style.left = '20px';
-      voiceButton.style.left = '70px';
+      chatBox.style.left = '-110%';
     }
-};
+  };
 
   window.addEventListener("resize", updateCharacterDirection);
   window.addEventListener("mousemove", updateCharacterDirection);
@@ -108,114 +97,33 @@ setElementStyles(voiceButton, {
   initializeDragEvents(digitalHuman);
   initializeDragEvents(characterImage);
 
-  characterImage.addEventListener("mousedown", (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    offsetX = e.clientX - digitalHuman.getBoundingClientRect().left;
-    offsetY = e.clientY - digitalHuman.getBoundingClientRect().top;
-    digitalHuman.style.cursor = 'grabbing';
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseup", onMouseUp);
-  });
-
-  digitalHuman.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    offsetX = e.touches[0].clientX - digitalHuman.getBoundingClientRect().left;
-    offsetY = e.touches[0].clientY - digitalHuman.getBoundingClientRect().top;
-    digitalHuman.style.cursor = 'grabbing';
-    document.addEventListener("touchmove", onTouchMove);
-    document.addEventListener("touchend", onTouchEnd);
-  });
-
   function onMouseMove(e) {
     const newX = e.clientX - offsetX;
     const newY = e.clientY - offsetY;
-    digitalHuman.style.left = `${newX}px`;
-    digitalHuman.style.top = `${newY}px`;
+    updateElementPositions(newX, newY);
   }
 
   function onTouchMove(e) {
     const newX = e.touches[0].clientX - offsetX;
     const newY = e.touches[0].clientY - offsetY;
-    digitalHuman.style.left = `${newX}px`;
-    digitalHuman.style.top = `${newY}px`;
+    updateElementPositions(newX, newY);
+  }
+
+  function onMouseUp() {
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+    digitalHuman.style.cursor = 'grab';
+  }
+
+  function onTouchEnd() {
+    document.removeEventListener("touchmove", onTouchMove);
+    document.removeEventListener("touchend", onTouchEnd);
+    digitalHuman.style.cursor = 'grab';
   }
 
   function updateElementPositions(newX, newY) {
     digitalHuman.style.left = `${newX}px`;
     digitalHuman.style.top = `${newY}px`;
-    chatBox.style.left = `${newX + 20}px`;
-    chatBox.style.top = `${newY - 80}px`;
-    voiceButton.style.left = `${newX + 40}px`;
-    voiceButton.style.top = `${newY + 50}px`;
-  }px`;
-    digitalHuman.style.top = `${newY}px`;
-    chatBox.style.left = `${newX + 20}px`;
-    chatBox.style.top = `${newY - 80}px`;
-    voiceButton.style.left = `${newX + 40}px`;
-    voiceButton.style.top = `${newY + 50}px`;
-  }px`;
-    digitalHuman.style.top = `${newY}px`;
-    chatBox.style.left = `${newX}px`;
-    chatBox.style.top = `${newY - 60}px`;
-    voiceButton.style.left = `${newX + 20}px`;
-    voiceButton.style.top = `${newY + 60}px`;
-  }
-
-  function onTouchMove(e) {
-    const newX = e.touches[0].clientX - offsetX;
-    const newY = e.touches[0].clientY - offsetY;
-    digitalHuman.style.left = `${newX}px`;
-    digitalHuman.style.top = `${newY}px`;
-    chatBox.style.left = `${newX}px`;
-    chatBox.style.top = `${newY - 60}px`;
-    voiceButton.style.left = `${newX + 20}px`;
-    voiceButton.style.top = `${newY + 60}px`;
-  }px`;
-    digitalHuman.style.top = `${newY}px`;
-    chatBox.style.left = `${newX}px`;
-    chatBox.style.top = `${newY - 60}px`;
-    voiceButton.style.left = `${newX + 20}px`;
-    voiceButton.style.top = `${newY + 60}px`;
-  }
-
-  function onMouseUp() {
-    document.removeEventListener("mousemove", onMouseMove);
-    document.removeEventListener("mouseup", onMouseUp);
-    digitalHuman.style.cursor = 'grab';
-  }
-
-  function onTouchEnd() {
-    document.removeEventListener("touchmove", onTouchMove);
-    document.removeEventListener("touchend", onTouchEnd);
-    digitalHuman.style.cursor = 'grab';
-  }
-
-  function onTouchEnd() {
-    document.removeEventListener("touchmove", onTouchMove);
-    document.removeEventListener("touchend", onTouchEnd);
-    digitalHuman.style.cursor = 'grab';
-  }
-
-  function onMouseMove(e) {
-    digitalHuman.style.left = `${e.clientX - offsetX}px`;
-    digitalHuman.style.top = `${e.clientY - offsetY}px`;
-  }
-
-  function onMouseUp() {
-    document.removeEventListener("mousemove", onMouseMove);
-    document.removeEventListener("mouseup", onMouseUp);
-    digitalHuman.style.cursor = 'grab';
-  }
-
-  function onMouseMove(e) {
-    digitalHuman.style.left = `${e.clientX - offsetX}px`;
-    digitalHuman.style.top = `${e.clientY - offsetY}px`;
-  }
-
-  function onMouseUp() {
-    document.removeEventListener("mousemove", onMouseMove);
-    document.removeEventListener("mouseup", onMouseUp);
   }
 
   // Handle voice button click
@@ -242,8 +150,8 @@ setElementStyles(voiceButton, {
     userChatBox.classList.add('user-chat-box');
     setElementStyles(userChatBox, {
       position: 'absolute',
-      top: '-70px',
-      left: '0',
+      top: '-100px',
+      left: '110%',
       background: '#e3f2fd',
       padding: '5px 10px',
       borderRadius: '10px',
@@ -253,12 +161,6 @@ setElementStyles(voiceButton, {
     userChatBox.innerText = text;
     chatBox.parentNode.insertBefore(userChatBox, chatBox);
   }
-
-  // Handle speaker icon click
-  speakerIcon.addEventListener("click", () => {
-    isMuted = !isMuted;
-    speakerIcon.classList.toggle("muted", isMuted);
-  });
 
   // Command handling
   async function handleCommand(command) {
@@ -333,11 +235,6 @@ setElementStyles(voiceButton, {
     "悄悄地朝一侧偷看"
   ];
 
-  function setElementStyles(element, styles) {
-    for (const property in styles) {
-      element.style[property] = styles[property];
-    }
-  }
   const randomSounds = [
     "嗯...",
     "啊哈！",
@@ -365,4 +262,10 @@ setElementStyles(voiceButton, {
       performRandomAction();
     }
   }, 10000);
+
+  function setElementStyles(element, styles) {
+    for (const property in styles) {
+      element.style[property] = styles[property];
+    }
+  }
 });
