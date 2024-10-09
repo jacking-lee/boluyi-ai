@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     width: '40px',
     height: '40px',
     position: 'absolute',
-    bottom: '-50px',
+    bottom: '0',
     left: '50%',
     transform: 'translateX(-50%)',
     cursor: 'pointer'
