@@ -1,14 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
   const characterImage = document.getElementById("character-image");
-  characterImage.style.width = '80px';
+  setElementStyles(characterImage, {
+    width: '100px',
+    height: 'auto',
+    borderRadius: '0'
+  });
   
       characterImage.style.borderRadius = '0';
   const digitalHuman = document.getElementById("digital-human");
-  digitalHuman.style.width = 'auto';
-  digitalHuman.style.height = 'auto';
-  digitalHuman.style.padding = '0';
-digitalHuman.style.background = 'transparent';
-  digitalHuman.style.border = 'none';
+  setElementStyles(digitalHuman, {
+    width: 'fit-content',
+    height: 'fit-content',
+    padding: '0',
+    background: 'transparent',
+    border: 'none',
+    cursor: 'grab',
+    boxShadow: 'none',
+    right: '20px',
+    bottom: '20px'
+  });
   
   digitalHuman.style.cursor = 'grab';
       digitalHuman.style.padding = '0';
@@ -16,37 +26,27 @@ digitalHuman.style.background = 'transparent';
       digitalHuman.style.right = '20px';
       digitalHuman.style.bottom = '20px';
   const chatBox = document.getElementById("chat-box");
-  chatBox.style.position = 'absolute';
-  chatBox.style.top = '-60px';
-  chatBox.style.left = '0';
-  chatBox.style.transform = 'translateX(10px)';
-  chatBox.style.background = '#e3f2fd';
-  chatBox.style.padding = '5px 10px';
-  chatBox.style.borderRadius = '10px';
-  chatBox.style.fontSize = '14px';
-  chatBox.style.maxWidth = '150px';
-      chatBox.style.top = '-30px';
-      chatBox.style.left = '110%';
-      chatBox.style.background = '#e3f2fd';
-      chatBox.style.padding = '5px 10px';
-      chatBox.style.borderRadius = '10px';
-      chatBox.style.fontSize = '12px';
-      chatBox.style.maxWidth = '200px';
+  setElementStyles(chatBox, {
+    position: 'absolute',
+    top: '-70px',
+    left: '100%',
+    background: '#e3f2fd',
+    padding: '5px 10px',
+    borderRadius: '10px',
+    fontSize: '12px',
+    maxWidth: '200px'
+  });
   const voiceButton = document.getElementById("voice-button");
-voiceButton.style.width = '25px';
-voiceButton.style.height = '25px';
-voiceButton.style.position = 'absolute';
-voiceButton.style.left = '50%';
-voiceButton.style.transform = 'translateX(-50%)';
-voiceButton.style.bottom = '-20px';
-voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
-  voiceButton.style.position = 'absolute';
-  voiceButton.style.top = '0';
-  voiceButton.style.left = '100%';
-  voiceButton.style.transform = 'translateX(20%)';
-  voiceButton.style.cursor = 'pointer';
-      voiceButton.style.height = '40px';
-      voiceButton.style.marginTop = '10px';
+setElementStyles(voiceButton, {
+    width: '40px',
+    height: '40px',
+    position: 'absolute',
+    top: '0',
+    left: '100%',
+    transform: 'translateX(20%)',
+    cursor: 'pointer',
+    marginTop: '10px'
+  });
   const speakerIcon = document.getElementById("speaker-icon");
   speakerIcon.remove();
       speakerIcon.style.height = '30px';
@@ -84,7 +84,32 @@ voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
 
   // Dragging functionality
   let offsetX, offsetY;
-  digitalHuman.addEventListener("mousedown", (e) => {
+
+  function initializeDragEvents(element) {
+    element.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      offsetX = e.clientX - digitalHuman.getBoundingClientRect().left;
+      offsetY = e.clientY - digitalHuman.getBoundingClientRect().top;
+      digitalHuman.style.cursor = 'grabbing';
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup", onMouseUp);
+    });
+
+    element.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      offsetX = e.touches[0].clientX - digitalHuman.getBoundingClientRect().left;
+      offsetY = e.touches[0].clientY - digitalHuman.getBoundingClientRect().top;
+      digitalHuman.style.cursor = 'grabbing';
+      document.addEventListener("touchmove", onTouchMove);
+      document.addEventListener("touchend", onTouchEnd);
+    });
+  }
+
+  initializeDragEvents(digitalHuman);
+  initializeDragEvents(characterImage);
+
+  characterImage.addEventListener("mousedown", (e) => {
+    e.stopPropagation();
     e.preventDefault();
     offsetX = e.clientX - digitalHuman.getBoundingClientRect().left;
     offsetY = e.clientY - digitalHuman.getBoundingClientRect().top;
@@ -105,7 +130,29 @@ voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
   function onMouseMove(e) {
     const newX = e.clientX - offsetX;
     const newY = e.clientY - offsetY;
+    updateElementPositions(newX, newY);
+  }
+
+  function onTouchMove(e) {
+    const newX = e.touches[0].clientX - offsetX;
+    const newY = e.touches[0].clientY - offsetY;
+    updateElementPositions(newX, newY);
+  }
+
+  function updateElementPositions(newX, newY) {
     digitalHuman.style.left = `${newX}px`;
+    digitalHuman.style.top = `${newY}px`;
+    chatBox.style.left = `${newX + 20}px`;
+    chatBox.style.top = `${newY - 80}px`;
+    voiceButton.style.left = `${newX + 40}px`;
+    voiceButton.style.top = `${newY + 50}px`;
+  }px`;
+    digitalHuman.style.top = `${newY}px`;
+    chatBox.style.left = `${newX + 20}px`;
+    chatBox.style.top = `${newY - 80}px`;
+    voiceButton.style.left = `${newX + 40}px`;
+    voiceButton.style.top = `${newY + 50}px`;
+  }px`;
     digitalHuman.style.top = `${newY}px`;
     chatBox.style.left = `${newX}px`;
     chatBox.style.top = `${newY - 60}px`;
@@ -133,6 +180,12 @@ voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
   function onMouseUp() {
     document.removeEventListener("mousemove", onMouseMove);
     document.removeEventListener("mouseup", onMouseUp);
+    digitalHuman.style.cursor = 'grab';
+  }
+
+  function onTouchEnd() {
+    document.removeEventListener("touchmove", onTouchMove);
+    document.removeEventListener("touchend", onTouchEnd);
     digitalHuman.style.cursor = 'grab';
   }
 
@@ -185,15 +238,17 @@ voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
   function appendUserText(text) {
     const userChatBox = document.createElement('div');
     userChatBox.classList.add('user-chat-box');
+    setElementStyles(userChatBox, {
+      position: 'absolute',
+      top: '-70px',
+      left: '0',
+      background: '#e3f2fd',
+      padding: '5px 10px',
+      borderRadius: '10px',
+      fontSize: '12px',
+      maxWidth: '150px'
+    });
     userChatBox.innerText = text;
-    userChatBox.style.position = 'absolute';
-    userChatBox.style.top = '-70px';
-    userChatBox.style.left = '0';
-    userChatBox.style.background = '#e3f2fd';
-    userChatBox.style.padding = '5px 10px';
-    userChatBox.style.borderRadius = '10px';
-    userChatBox.style.fontSize = '12px';
-    userChatBox.style.maxWidth = '150px';
     chatBox.parentNode.insertBefore(userChatBox, chatBox);
   }
 
@@ -275,6 +330,12 @@ voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
     "脸上露出困惑的表情",
     "悄悄地朝一侧偷看"
   ];
+
+  function setElementStyles(element, styles) {
+    for (const property in styles) {
+      element.style[property] = styles[property];
+    }
+  }
   const randomSounds = [
     "嗯...",
     "啊哈！",
