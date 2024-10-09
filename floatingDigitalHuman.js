@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Update character direction based on screen center
   const updateCharacterDirection = () => {
     const characterPosition = digitalHuman.getBoundingClientRect().left + digitalHuman.offsetWidth / 2;
+    const characterWidth = digitalHuman.offsetWidth;
     if (characterPosition < window.innerWidth / 2) {
       characterImage.style.transform = "scaleX(1)";
       setElementStyles(chatBox, {
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         transform: 'translateX(0)'
       });
       setElementStyles(voiceButton, {
-        left: '10%'
+        left: `${(characterWidth * 0.3)}px` // Position microphone in front of character
       });
     } else {
       characterImage.style.transform = "scaleX(-1)";
@@ -75,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         transform: 'translateX(-100%)'
       });
       setElementStyles(voiceButton, {
-        left: '80%'
+        left: `${(characterWidth * 0.7)}px` // Position microphone in front of character
       });
     }
   };
