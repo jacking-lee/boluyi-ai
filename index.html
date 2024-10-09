@@ -10,14 +10,15 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 2px solid #2196F3;
+      background: transparent;
+      border: none;
       border-radius: 15px;
-      padding: 15px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      padding: 0;
+      box-shadow: none;
       max-width: 200px;
       text-align: center;
       z-index: 9999;
+      cursor: move;
     }
 
     #character-image {
@@ -26,48 +27,97 @@
     }
 
     #chat-box {
-      margin-top: 10px;
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
       background: #e3f2fd;
       padding: 10px;
       border-radius: 10px;
     }
 
     #voice-button {
-      margin-top: 10px;
-      padding: 5px 10px;
-      background: #2196F3;
-      color: white;
-      border: none;
-      border-radius: 5px;
+      width: 30px;
+      height: 30px;
       cursor: pointer;
     }
 
     #voice-button:hover {
       background: #1976D2;
     }
+
+    #speaker-icon {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    #speaker-icon.muted {
+      filter: grayscale(100%);
+    }
   </style>
 </head>
 <body>
   <div id="digital-human">
-    <img id="character-image" src="boluyi.png" alt="布鲁伊" />
+    <img id="character-image" src="bluey.png" alt="布鲁伊" />
     <div id="chat-box">
       <p id="output-text">你好，我是布鲁伊，可以帮你做什么呢？</p>
     </div>
-    <button id="voice-button">🎙️ 语音输入</button>
+    <img id="voice-button" src="microphone.png" alt="Microphone" />
+    <img id="speaker-icon" src="speaker.png" alt="Speaker" />
   </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      const synth = window.speechSynthesis;
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'zh-CN';
+      recognition.interimResults = false;
+      let isMuted = false;
+
+      // 添加拖动功能
+      const digitalHuman = document.getElementById("digital-human");
+      let offsetX, offsetY;
+
+      digitalHuman.addEventListener("mousedown", (e) => {
+        offsetX = e.clientX - digitalHuman.getBoundingClientRect().left;
+        offsetY = e.clientY - digitalHuman.getBoundingClientRect().top;
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+      });
+
+      function onMouseMove(e) {
+        digitalHuman.style.left = `${e.clientX - offsetX}px`;
+        digitalHuman.style.top = `${e.clientY - offsetY}px`;
+      }
+
+      function onMouseUp() {
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+      }
+
       // 处理语音按钮点击
-      document.getElementById("voice-button").addEventListener("click", () => {
-        let userText = prompt("请告诉布鲁伊你想做什么：");
-        if (userText) {
-          handleCommand(userText);
+      document.getElementById("character-image").addEventListener("click", () => {
+        if (recognition.recognizing) {
+          recognition.stop();
+        } else {
+          recognition.start();
         }
       });
 
+      recognition.addEventListener('result', (event) => {
+        const userText = event.results[0][0].transcript;
+        handleCommand(userText);
+      });
+
+      // 处理静音按钮点击
+      const speakerIcon = document.getElementById("speaker-icon");
+      speakerIcon.addEventListener("click", () => {
+        isMuted = !isMuted;
+        speakerIcon.classList.toggle("muted", isMuted);
+      });
+
       // 命令处理函数
-      function handleCommand(command) {
+      async function handleCommand(command) {
         let response = "抱歉，我不太理解你说的是什么。";
 
         if (command.includes("打开谷歌")) {
@@ -75,10 +125,59 @@
           window.open("https://www.google.com", "_blank");
         } else if (command.includes("告诉我关于布鲁伊的故事")) {
           response = "布鲁伊是一只六岁的蓝色澳大利亚牧牛犬，她喜欢冒险和和家人一起玩耍。";
+        } else {
+          // 调用 OpenAI 接口获取响应
+          const openaiResponse = await getOpenAIResponse(command);
+          response = openaiResponse || response;
         }
 
         document.getElementById("output-text").innerText = response;
+        if (!isMuted) {
+          speakText(response);
+        }
       }
+
+      // 调用 OpenAI 接口
+      async function getOpenAIResponse(command) {
+        try {
+          const response = await fetch('https://api.openai.com/v1/completions', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+            },
+            body: JSON.stringify({
+              model: 'text-davinci-003',
+              prompt: command,
+              max_tokens: 150
+            })
+          });
+
+          const data = await response.json();
+          return data.choices[0].text.trim();
+        } catch (error) {
+          console.error('Error:', error);
+          return null;
+        }
+      }
+
+      // 文本转语音 (TTS)
+      function speakText(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        synth.speak(utterance);
+      }
+
+      // 保持浮动窗口在所有标签页显示
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === 'hidden') {
+          sessionStorage.setItem("digitalHumanHTML", digitalHuman.outerHTML);
+        } else if (document.visibilityState === 'visible') {
+          const savedHTML = sessionStorage.getItem("digitalHumanHTML");
+          if (savedHTML && !document.getElementById("digital-human")) {
+            document.body.insertAdjacentHTML('beforeend', savedHTML);
+          }
+        }
+      });
     });
   </script>
 </body>
