@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (characterPosition < characterOffset) {
       characterImage.style.transform = "scaleX(1)";
       setElementStyles(chatBox, {
-        left: `${characterWidth / 2 + offsetAdjustment}px`,
+        left: `${characterWidth + 20}px`, // Adjusted to ensure chat box is positioned to the right of character
         transform: 'translateX(0)'
       });
       setElementStyles(voiceButton, {
@@ -74,11 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       characterImage.style.transform = "scaleX(-1)";
       setElementStyles(chatBox, {
-        left: `${-characterWidth / 2 - offsetAdjustment}px`,
+        right: `${characterWidth + 20}px`, // Adjusted to ensure chat box is positioned to the left of character
+        left: 'auto',
         transform: 'translateX(0)'
       });
       setElementStyles(voiceButton, {
-        left: `${-characterWidth * 0.3}px` // Position microphone in front of character
+        right: `${characterWidth * 0.3}px`, // Position microphone in front of character
+        left: 'auto'
       });
     }
   };
