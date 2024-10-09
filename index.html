@@ -62,7 +62,7 @@
     <div id="chat-box">
       <p id="output-text">你好，我是布鲁伊，可以帮你做什么呢？</p>
     </div>
-    <img id="voice-button" src="microphone.png" alt="Microphone" />
+    <img id="voice-button" src="microphone-on.png" alt="Microphone" />
     <img id="speaker-icon" src="speaker.png" alt="Speaker" />
   </div>
 
@@ -96,12 +96,17 @@
       }
 
       // 处理语音按钮点击
-      document.getElementById("character-image").addEventListener("click", () => {
-        if (recognition.recognizing) {
+      const voiceButton = document.getElementById("voice-button");
+      let isVoiceOn = false;
+      voiceButton.addEventListener("click", () => {
+        if (isVoiceOn) {
           recognition.stop();
+          voiceButton.src = "microphone-off.png";
         } else {
           recognition.start();
+          voiceButton.src = "microphone-on.png";
         }
+        isVoiceOn = !isVoiceOn;
       });
 
       recognition.addEventListener('result', (event) => {
