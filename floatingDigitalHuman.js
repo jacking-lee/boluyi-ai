@@ -60,23 +60,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const updateCharacterDirection = () => {
     const characterPosition = digitalHuman.getBoundingClientRect().left + digitalHuman.offsetWidth / 2;
     const characterWidth = digitalHuman.offsetWidth;
-    if (characterPosition < window.innerWidth / 2) {
+    const characterOffset = window.innerWidth / 2;
+    if (characterPosition < characterOffset) {
       characterImage.style.transform = "scaleX(1)";
       setElementStyles(chatBox, {
-        left: 'calc(50% + 40px)',
+        left: `${characterWidth / 2}px`,
         transform: 'translateX(0)'
       });
       setElementStyles(voiceButton, {
-        left: `${(characterWidth * 0.3)}px` // Position microphone in front of character
+        left: `${characterWidth * 0.3}px` // Position microphone in front of character
       });
     } else {
       characterImage.style.transform = "scaleX(-1)";
       setElementStyles(chatBox, {
-        left: 'calc(50% - 40px)',
-        transform: 'translateX(-100%)'
+        left: `${-characterWidth / 2}px`,
+        transform: 'translateX(0)'
       });
       setElementStyles(voiceButton, {
-        left: `${(characterWidth * 0.7)}px` // Position microphone in front of character
+        left: `${-characterWidth * 0.3}px` // Position microphone in front of character
       });
     }
   };
