@@ -1,12 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const characterImage = document.getElementById("character-image");
-  characterImage.style.width = '60px';
-  characterImage.style.borderRadius = '50%';
+  characterImage.style.width = '80px';
+  
       characterImage.style.borderRadius = '50%';
   const digitalHuman = document.getElementById("digital-human");
-  digitalHuman.style.width = 'fit-content';
-  digitalHuman.style.height = 'fit-content';
+  digitalHuman.style.width = 'auto';
+  digitalHuman.style.height = 'auto';
   digitalHuman.style.padding = '0';
+digitalHuman.style.background = 'transparent';
   digitalHuman.style.border = 'none';
   
   digitalHuman.style.cursor = 'move';
@@ -16,8 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
       digitalHuman.style.bottom = '20px';
   const chatBox = document.getElementById("chat-box");
   chatBox.style.position = 'absolute';
-  chatBox.style.top = '-20px';
-  chatBox.style.left = '70px';
+  chatBox.style.top = '-60px';
+  chatBox.style.left = '0';
   chatBox.style.transform = 'translateX(10px)';
   chatBox.style.background = '#e3f2fd';
   chatBox.style.padding = '5px 10px';
@@ -35,8 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
 voiceButton.style.width = '25px';
 voiceButton.style.height = '25px';
 voiceButton.style.position = 'absolute';
-voiceButton.style.left = '-30px';
-voiceButton.style.bottom = '0';
+voiceButton.style.left = '50%';
+voiceButton.style.transform = 'translateX(-50%)';
+voiceButton.style.bottom = '-20px';
 voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
   voiceButton.style.position = 'absolute';
   voiceButton.style.top = '0';
@@ -123,8 +125,8 @@ voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
     userChatBox.classList.add('user-chat-box');
     userChatBox.innerText = text;
     userChatBox.style.position = 'absolute';
-    userChatBox.style.top = '-40px';
-    userChatBox.style.left = '70px';
+    userChatBox.style.top = '-100px';
+    userChatBox.style.left = '0';
     userChatBox.style.background = '#e3f2fd';
     userChatBox.style.padding = '5px 10px';
     userChatBox.style.borderRadius = '10px';
