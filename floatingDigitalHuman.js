@@ -128,3 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
   chatBox.style.right = '40px'; // Move the chat box to the right to avoid blocking the character
   digitalHuman.insertAdjacentHTML('afterbegin', userChatBoxHTML);
 });
+
+// Version update
+console.log('Version 1.02: Enhanced functionality and improved UI interaction.');
