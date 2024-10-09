@@ -2,68 +2,12 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>浮动数字人 - 布鲁伊</title>
-  <style>
-    /* CSS 样式部分 */
-    #digital-human {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: transparent;
-      border: none;
-      border-radius: 15px;
-      max-width: 200px;
-      text-align: center;
-      z-index: 9999;
-      cursor: move;
-    }
-
-    #character-image {
-      width: 100px;
-      border-radius: 50%;
-    }
-
-    #chat-box {
-      position: absolute;
-      top: -60px;
-      right: 40px; /* 调整位置，避免遮挡布鲁伊 */
-      background: #e3f2fd;
-      padding: 10px;
-      border-radius: 10px;
-    }
-
-    #user-chat-box {
-      position: absolute;
-      top: -120px; /* 用户的对话框在布鲁伊的对话框上方 */
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fff3e0;
-      padding: 10px;
-      border-radius: 10px;
-    }
-
-    #voice-button {
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-    }
-
-    #speaker-icon {
-      margin-left: 10px;
-      cursor: pointer;
-    }
-
-    #speaker-icon.muted {
-      filter: grayscale(100%);
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>浮动数字人 - Boluyi</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="digital-human">
-    <div id="user-chat-box">
-      <p id="user-text"></p>
-    </div>
     <img id="character-image" src="boluyi.png" alt="Boluyi" />
     <div id="chat-box">
       <p id="output-text">你好，我是布鲁伊，可以帮你做什么呢？</p>
@@ -72,22 +16,20 @@
     <img id="speaker-icon" src="speaker.png" alt="Speaker" />
   </div>
 
-  <!-- 引用 JavaScript 模块 -->
-  <script type="module">
-    import { FloatingDigitalHuman } from './floatingDigitalHuman.js';
+  <div id="call_screen">
+    <div class="doctor-card">
+      <img src="https://via.placeholder.com/120" alt="医生" class="doctor-image">
+      <h2 class="doctor-name">张海生医生</h2>
+      <p class="doctor-title">杭州市第一人民医院 精神科医生</p>
+    </div>
+    <button id="call_button"><span class="call-icon">&#9742;</span></button> <!-- 拨号按钮 -->
+    <div id="call_status">拨号中...</div> <!-- 拨号状态 -->
+  </div>
 
-    // 初始化浮动数字人
-    const apiEndpoints = {
-      private: 'https://private-llm-api.com/v1/completions',
-      backup: 'https://backup-llm-api.com/v1/completions'
-    };
+  <div id="video_screen">
+    <video id="rtc_media_player" controls autoplay></video>
+  </div>
 
-    const apiKeys = {
-      private: 'your_private_api_key_here',
-      backup: 'your_backup_api_key_here'
-    };
-
-    new FloatingDigitalHuman(apiEndpoints, apiKeys);
-  </script>
+  <script type="module" src="floatingDigitalHuman.js"></script>
 </body>
 </html>
