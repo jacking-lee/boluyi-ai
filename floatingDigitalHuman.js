@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     background: '#e3f2fd',
     padding: '5px 10px',
     borderRadius: '10px',
-    fontSize: '12px',
+    fontSize: '12px',    
     maxWidth: '200px'
   });
 
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     height: '40px',
     position: 'absolute',
     bottom: '10px',
-    left: '10px', // Updated to position microphone to the front left of the character
+    left: '30%', // Updated to position microphone more accurately relative to character
     cursor: 'pointer'
   });
 
@@ -61,12 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const characterPosition = digitalHuman.getBoundingClientRect().left + digitalHuman.offsetWidth / 2;
     if (characterPosition < window.innerWidth / 2) {
       characterImage.style.transform = "scaleX(1)";
-      chatBox.style.left = '50%';
-      voiceButton.style.left = '10px'; // Adjust microphone position based on character direction
+      chatBox.style.left = '60%'; // Adjusted chat box relative to character
+      voiceButton.style.left = '30%'; // Adjusted microphone position relative to character
     } else {
       characterImage.style.transform = "scaleX(-1)";
-      chatBox.style.left = '50%';
-      voiceButton.style.left = '110px'; // Adjust microphone position based on character direction
+      chatBox.style.left = '-10%'; // Adjusted chat box relative to character
+      voiceButton.style.left = '-30%'; // Adjusted microphone position relative to character
     }
   };
 
