@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   const characterImage = document.getElementById("character-image");
-  characterImage.style.width = '80px';
+  characterImage.style.width = '60px';
   characterImage.style.borderRadius = '50%';
       characterImage.style.borderRadius = '50%';
   const digitalHuman = document.getElementById("digital-human");
   digitalHuman.style.width = 'fit-content';
   digitalHuman.style.height = 'fit-content';
   digitalHuman.style.padding = '0';
-  digitalHuman.style.boxShadow = 'none';
-  digitalHuman.style.borderRadius = '50%';
+  digitalHuman.style.border = 'none';
+  
   digitalHuman.style.cursor = 'move';
       digitalHuman.style.padding = '10px';
       digitalHuman.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
       digitalHuman.style.bottom = '20px';
   const chatBox = document.getElementById("chat-box");
   chatBox.style.position = 'absolute';
-  chatBox.style.top = '-50px';
-  chatBox.style.left = '100%';
+  chatBox.style.top = '-20px';
+  chatBox.style.left = '70px';
   chatBox.style.transform = 'translateX(10px)';
   chatBox.style.background = '#e3f2fd';
   chatBox.style.padding = '5px 10px';
@@ -32,8 +32,12 @@ document.addEventListener("DOMContentLoaded", () => {
       chatBox.style.fontSize = '12px';
       chatBox.style.maxWidth = '200px';
   const voiceButton = document.getElementById("voice-button");
-  voiceButton.style.width = '30px';
-  voiceButton.style.height = '30px';
+voiceButton.style.width = '25px';
+voiceButton.style.height = '25px';
+voiceButton.style.position = 'absolute';
+voiceButton.style.left = '-30px';
+voiceButton.style.bottom = '0';
+voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
   voiceButton.style.position = 'absolute';
   voiceButton.style.top = '0';
   voiceButton.style.left = '100%';
@@ -62,16 +66,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const screenCenterX = window.innerWidth / 2;
   const updateCharacterDirection = () => {
     const characterPosition = digitalHuman.getBoundingClientRect().left + digitalHuman.offsetWidth / 2;
-    if (characterPosition < screenCenterX) {
+    if (characterPosition < window.innerWidth / 2) {
       characterImage.style.transform = "scaleX(1)";
-      chatBox.style.left = "110%";
-      chatBox.style.right = "auto";
+      chatBox.style.left = '70px';
+      voiceButton.style.left = '-30px';
     } else {
       characterImage.style.transform = "scaleX(-1)";
-      chatBox.style.left = "auto";
-      chatBox.style.right = "110%";
+      chatBox.style.left = '-150px';
+      voiceButton.style.left = '70px';
     }
-  };
+};
 
   window.addEventListener("resize", updateCharacterDirection);
   window.addEventListener("mousemove", updateCharacterDirection);
@@ -118,7 +122,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const userChatBox = document.createElement('div');
     userChatBox.classList.add('user-chat-box');
     userChatBox.innerText = text;
-    chatBox.parentNode.insertBefore(userChatBox, chatBox.nextSibling);
+    userChatBox.style.position = 'absolute';
+    userChatBox.style.top = '-40px';
+    userChatBox.style.left = '70px';
+    userChatBox.style.background = '#e3f2fd';
+    userChatBox.style.padding = '5px 10px';
+    userChatBox.style.borderRadius = '10px';
+    userChatBox.style.fontSize = '12px';
+    userChatBox.style.maxWidth = '150px';
+    chatBox.parentNode.insertBefore(userChatBox, chatBox);
   }
 
   // Handle speaker icon click
