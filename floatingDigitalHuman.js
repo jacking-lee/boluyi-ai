@@ -4,11 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatBox = document.getElementById("chat-box");
   const voiceButton = document.getElementById("voice-button");
   const speakerIcon = document.getElementById("speaker-icon");
-  const callScreen = document.getElementById("call_screen");
-  const callButton = document.getElementById("call_button");
-  const callStatus = document.getElementById("call_status");
-  const videoScreen = document.getElementById("video_screen");
-  const rtcMediaPlayer = document.getElementById("rtc_media_player");
   let isActive = false;
   let isVoiceOn = false;
   let isMuted = false;
@@ -145,29 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function speakText(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     synth.speak(utterance);
-  }
-
-  // Call screen logic
-  characterImage.addEventListener("click", () => {
-    callScreen.style.display = "flex";
-  });
-
-  callButton.addEventListener("click", () => {
-    callButton.disabled = true;
-    callStatus.style.display = "block";
-
-    // Simulate dialing, enter video screen after 3 seconds
-    setTimeout(() => {
-      callScreen.style.display = "none";
-      videoScreen.style.display = "block";
-      startVideoStream();
-    }, 3000);
-  });
-
-  // Start video stream
-  function startVideoStream() {
-    const url = "https://metahuman.assion.cn/rtc/v1/whep/?app=live&stream=livestream";
-    rtcMediaPlayer.src = url;
   }
 
   // Random animations for attention
