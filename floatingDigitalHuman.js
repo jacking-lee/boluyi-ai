@@ -68,7 +68,7 @@ export class FloatingDigitalHuman {
       console.error('Error:', error);
       response = "哎呀，我现在脑子丢了，无法理解你说的。";
     }
-    this.updateChatBox(response);
+    this.updateChatBox(response, 'response');
     if (!this.isMuted) {
       this.speakText(response);
     }
@@ -101,8 +101,15 @@ export class FloatingDigitalHuman {
     }
   }
 
-  updateChatBox(text) {
-    document.getElementById('output-text').innerText = text;
+  updateChatBox(text, type) {
+    const chatBox = document.getElementById('chat-box');
+    if (type === 'response') {
+      chatBox.innerHTML = `<p id="output-text">${text}</p>`;
+      chatBox.style.right = '20px';
+    } else if (type === 'user') {
+      const userChatBox = document.getElementById('user-chat-box');
+      userChatBox.innerHTML = `<p id="user-text">${text}</p>`;
+    }
   }
 
   speakText(text) {
@@ -110,3 +117,14 @@ export class FloatingDigitalHuman {
     this.synth.speak(utterance);
   }
 }
+
+// HTML Update: Add user chat box above the digital human's chat box
+const userChatBoxHTML = `<div id="user-chat-box" style="position: absolute; top: -120px; left: 50%; transform: translateX(-50%); background: #fff3e0; padding: 10px; border-radius: 10px;">
+  <p id="user-text"></p>
+</div>`;
+document.addEventListener("DOMContentLoaded", () => {
+  const digitalHuman = document.getElementById('digital-human');
+  const chatBox = document.getElementById('chat-box');
+  chatBox.style.right = '40px'; // Move the chat box to the right to avoid blocking the character
+  digitalHuman.insertAdjacentHTML('afterbegin', userChatBoxHTML);
+});
