@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     height: '40px',
     position: 'absolute',
     bottom: '10px',
-    left: '-50px',
+    left: '20px', // Updated to position microphone to the left of the character
     cursor: 'pointer'
   });
 
@@ -62,9 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (characterPosition < window.innerWidth / 2) {
       characterImage.style.transform = "scaleX(1)";
       chatBox.style.left = '50%';
+      voiceButton.style.left = '20px'; // Adjust microphone position based on character direction
     } else {
       characterImage.style.transform = "scaleX(-1)";
       chatBox.style.left = '50%';
+      voiceButton.style.left = '80px'; // Adjust microphone position based on character direction
     }
   };
 
