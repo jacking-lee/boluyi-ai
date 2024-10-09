@@ -131,15 +131,23 @@
       async function handleCommand(command) {
         let response = "抱歉，我不太理解你说的是什么。";
 
-        if (command.includes("打开谷歌")) {
-          response = "正在帮你打开谷歌。";
-          window.open("https://www.google.com", "_blank");
-        } else if (command.includes("告诉我关于布鲁伊的故事")) {
-          response = "布鲁伊是一只六岁的蓝色澳大利亚牧牛犬，她喜欢冒险和和家人一起玩耍。";
-        } else {
-          // 调用 OpenAI 接口获取响应
-          const openaiResponse = await getOpenAIResponse(command);
-          response = openaiResponse || response;
+        try {
+          // 调用私有大模型接口获取响应
+          const privateModelResponse = await getPrivateModelResponse(command);
+          if (privateModelResponse) {
+            response = privateModelResponse;
+          } else {
+            // 调用备选大模型接口
+            const backupModelResponse = await getBackupModelResponse(command);
+            if (backupModelResponse) {
+              response = backupModelResponse;
+            } else {
+              response = "哎呀，我现在脑子丢了，无法理解你说的。";
+            }
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          response = "哎呀，我现在脑子丢了，无法理解你说的。";
         }
 
         document.getElementById("output-text").innerText = response;
@@ -148,17 +156,41 @@
         }
       }
 
-      // 调用 OpenAI 接口
-      async function getOpenAIResponse(command) {
+      // 调用私有大模型接口
+      async function getPrivateModelResponse(command) {
         try {
-          const response = await fetch('https://api.openai.com/v1/completions', {
+          const response = await fetch('https://private-llm-api.com/v1/completions', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Bearer sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+              'Authorization': 'Bearer your_private_api_key_here'
             },
             body: JSON.stringify({
-              model: 'text-davinci-003',
+              model: 'private-model',
+              prompt: command,
+              max_tokens: 150
+            })
+          });
+
+          const data = await response.json();
+          return data.choices[0].text.trim();
+        } catch (error) {
+          console.error('Error:', error);
+          return null;
+        }
+      }
+
+      // 调用备选大模型接口
+      async function getBackupModelResponse(command) {
+        try {
+          const response = await fetch('https://backup-llm-api.com/v1/completions', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer your_backup_api_key_here'
+            },
+            body: JSON.stringify({
+              model: 'backup-model',
               prompt: command,
               max_tokens: 150
             })
