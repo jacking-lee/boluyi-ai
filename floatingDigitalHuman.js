@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       position: 'absolute',
       top: '-100px',
       left: '110%',
-      background: '#e3f2fd',
+      background: '#ffe4e1', // Changed to light pink for user chat box
       padding: '5px 10px',
       borderRadius: '10px',
       fontSize: '12px',
