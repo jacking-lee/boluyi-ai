@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   const characterImage = document.getElementById("character-image");
-  characterImage.style.width = '100%';
+  characterImage.style.width = '80px';
   characterImage.style.borderRadius = '50%';
       characterImage.style.borderRadius = '50%';
   const digitalHuman = document.getElementById("digital-human");
-  digitalHuman.style.width = 'auto';
-  digitalHuman.style.height = 'auto';
+  digitalHuman.style.width = 'fit-content';
+  digitalHuman.style.height = 'fit-content';
   digitalHuman.style.padding = '0';
   digitalHuman.style.boxShadow = 'none';
   digitalHuman.style.borderRadius = '50%';
@@ -115,7 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Append user input to chat box
   function appendUserText(text) {
-    chatBox.innerText = text;
+    const userChatBox = document.createElement('div');
+    userChatBox.classList.add('user-chat-box');
+    userChatBox.innerText = text;
+    chatBox.parentNode.insertBefore(userChatBox, chatBox.nextSibling);
   }
 
   // Handle speaker icon click
