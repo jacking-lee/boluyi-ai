@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const characterImage = document.getElementById("character-image");
   characterImage.style.width = '80px';
   
-      characterImage.style.borderRadius = '50%';
+      characterImage.style.borderRadius = '0';
   const digitalHuman = document.getElementById("digital-human");
   digitalHuman.style.width = 'auto';
   digitalHuman.style.height = 'auto';
@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
 digitalHuman.style.background = 'transparent';
   digitalHuman.style.border = 'none';
   
-  digitalHuman.style.cursor = 'move';
-      digitalHuman.style.padding = '10px';
-      digitalHuman.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+  digitalHuman.style.cursor = 'grab';
+      digitalHuman.style.padding = '0';
+      digitalHuman.style.boxShadow = 'none';
       digitalHuman.style.right = '20px';
       digitalHuman.style.bottom = '20px';
   const chatBox = document.getElementById("chat-box");
@@ -70,7 +70,7 @@ voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
     const characterPosition = digitalHuman.getBoundingClientRect().left + digitalHuman.offsetWidth / 2;
     if (characterPosition < window.innerWidth / 2) {
       characterImage.style.transform = "scaleX(1)";
-      chatBox.style.left = '70px';
+      chatBox.style.left = '0';
       voiceButton.style.left = '-30px';
     } else {
       characterImage.style.transform = "scaleX(-1)";
@@ -87,9 +87,21 @@ voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
   digitalHuman.addEventListener("mousedown", (e) => {
     offsetX = e.clientX - digitalHuman.getBoundingClientRect().left;
     offsetY = e.clientY - digitalHuman.getBoundingClientRect().top;
+    digitalHuman.style.cursor = 'grabbing';
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
   });
+
+  function onMouseMove(e) {
+    digitalHuman.style.left = `${e.clientX - offsetX}px`;
+    digitalHuman.style.top = `${e.clientY - offsetY}px`;
+  }
+
+  function onMouseUp() {
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+    digitalHuman.style.cursor = 'grab';
+  }
 
   function onMouseMove(e) {
     digitalHuman.style.left = `${e.clientX - offsetX}px`;
@@ -125,7 +137,7 @@ voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
     userChatBox.classList.add('user-chat-box');
     userChatBox.innerText = text;
     userChatBox.style.position = 'absolute';
-    userChatBox.style.top = '-100px';
+    userChatBox.style.top = '-70px';
     userChatBox.style.left = '0';
     userChatBox.style.background = '#e3f2fd';
     userChatBox.style.padding = '5px 10px';
