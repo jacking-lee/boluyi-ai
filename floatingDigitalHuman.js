@@ -30,7 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     padding: '15px 30px',
     borderRadius: '10px',
     fontSize: '14px',    
-    maxWidth: '500px' // Updated to significantly increase chat box width
+    maxWidth: '800px', // Updated to significantly increase chat box width to accommodate more text
+    minWidth: '300px'  // Set minimum width for consistency
   });
 
   const voiceButton = document.getElementById("voice-button");
@@ -67,7 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
       setElementStyles(chatBox, {
         left: `${characterWidth + 50}px`, // Adjusted to ensure chat box is positioned to the right of character
         transform: 'translateX(0)',
-        maxWidth: '500px' // Ensure chat box width is consistent
+        maxWidth: '800px', // Ensure chat box width is consistent
+        minWidth: '300px'
       });
       setElementStyles(voiceButton, {
         left: `${characterWidth * 0.5}px` // Position microphone in front of character
@@ -78,7 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
         right: `${characterWidth + 50}px`, // Adjusted to ensure chat box is positioned to the left of character
         left: 'auto',
         transform: 'translateX(0)',
-        maxWidth: '500px' // Ensure chat box width is consistent
+        maxWidth: '800px', // Ensure chat box width is consistent
+        minWidth: '300px'
       });
       setElementStyles(voiceButton, {
         right: `${characterWidth * 0.5}px`, // Position microphone in front of character
@@ -177,7 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
       padding: '15px 30px',
       borderRadius: '10px',
       fontSize: '14px',
-      maxWidth: '500px' // Updated to significantly increase chat box width
+      maxWidth: '800px', // Updated to significantly increase chat box width
+      minWidth: '300px'
     });
     userChatBox.innerText = text;
     chatBox.parentNode.insertBefore(userChatBox, chatBox);
