@@ -61,12 +61,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const characterPosition = digitalHuman.getBoundingClientRect().left + digitalHuman.offsetWidth / 2;
     if (characterPosition < window.innerWidth / 2) {
       characterImage.style.transform = "scaleX(1)";
-      chatBox.style.left = '60%'; // Adjusted chat box relative to character
-      voiceButton.style.left = '30%'; // Adjusted microphone position relative to character
+      setElementStyles(chatBox, {
+        left: '60%',
+        transform: 'translateX(-70%)'
+      });
+      setElementStyles(voiceButton, {
+        left: '20%'
+      });
     } else {
       characterImage.style.transform = "scaleX(-1)";
-      chatBox.style.left = '-10%'; // Adjusted chat box relative to character
-      voiceButton.style.left = '-30%'; // Adjusted microphone position relative to character
+      setElementStyles(chatBox, {
+        left: '-10%',
+        transform: 'translateX(-30%)'
+      });
+      setElementStyles(voiceButton, {
+        left: '-20%'
+      });
     }
   };
 
@@ -126,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateElementPositions(newX, newY) {
     digitalHuman.style.left = `${newX}px`;
     digitalHuman.style.top = `${newY}px`;
+    updateCharacterDirection();
   }
 
   // Handle voice button click
