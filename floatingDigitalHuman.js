@@ -85,12 +85,62 @@ voiceButton.style.cursor = 'pointer';  voiceButton.style.height = '30px';
   // Dragging functionality
   let offsetX, offsetY;
   digitalHuman.addEventListener("mousedown", (e) => {
+    e.preventDefault();
     offsetX = e.clientX - digitalHuman.getBoundingClientRect().left;
     offsetY = e.clientY - digitalHuman.getBoundingClientRect().top;
     digitalHuman.style.cursor = 'grabbing';
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
   });
+
+  digitalHuman.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    offsetX = e.touches[0].clientX - digitalHuman.getBoundingClientRect().left;
+    offsetY = e.touches[0].clientY - digitalHuman.getBoundingClientRect().top;
+    digitalHuman.style.cursor = 'grabbing';
+    document.addEventListener("touchmove", onTouchMove);
+    document.addEventListener("touchend", onTouchEnd);
+  });
+
+  function onMouseMove(e) {
+    const newX = e.clientX - offsetX;
+    const newY = e.clientY - offsetY;
+    digitalHuman.style.left = `${newX}px`;
+    digitalHuman.style.top = `${newY}px`;
+    chatBox.style.left = `${newX}px`;
+    chatBox.style.top = `${newY - 60}px`;
+    voiceButton.style.left = `${newX + 20}px`;
+    voiceButton.style.top = `${newY + 60}px`;
+  }
+
+  function onTouchMove(e) {
+    const newX = e.touches[0].clientX - offsetX;
+    const newY = e.touches[0].clientY - offsetY;
+    digitalHuman.style.left = `${newX}px`;
+    digitalHuman.style.top = `${newY}px`;
+    chatBox.style.left = `${newX}px`;
+    chatBox.style.top = `${newY - 60}px`;
+    voiceButton.style.left = `${newX + 20}px`;
+    voiceButton.style.top = `${newY + 60}px`;
+  }px`;
+    digitalHuman.style.top = `${newY}px`;
+    chatBox.style.left = `${newX}px`;
+    chatBox.style.top = `${newY - 60}px`;
+    voiceButton.style.left = `${newX + 20}px`;
+    voiceButton.style.top = `${newY + 60}px`;
+  }
+
+  function onMouseUp() {
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+    digitalHuman.style.cursor = 'grab';
+  }
+
+  function onTouchEnd() {
+    document.removeEventListener("touchmove", onTouchMove);
+    document.removeEventListener("touchend", onTouchEnd);
+    digitalHuman.style.cursor = 'grab';
+  }
 
   function onMouseMove(e) {
     digitalHuman.style.left = `${e.clientX - offsetX}px`;
