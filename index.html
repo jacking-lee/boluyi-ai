@@ -58,7 +58,7 @@
 </head>
 <body>
   <div id="digital-human">
-    <img id="character-image" src="bluey.png" alt="布鲁伊" />
+    <img id="character-image" src="boluyi.png" alt="Boluyi" />
     <div id="chat-box">
       <p id="output-text">你好，我是布鲁伊，可以帮你做什么呢？</p>
     </div>
@@ -68,6 +68,12 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      const characterImage = document.getElementById("character-image");
+      let isActive = false;
+      setInterval(() => {
+        isActive = !isActive;
+        characterImage.src = isActive ? "boluyi-1.png" : "boluyi.png";
+      }, 1000);
       const synth = window.speechSynthesis;
       const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
       recognition.lang = 'zh-CN';
