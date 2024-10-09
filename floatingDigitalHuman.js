@@ -61,10 +61,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const characterPosition = digitalHuman.getBoundingClientRect().left + digitalHuman.offsetWidth / 2;
     const characterWidth = digitalHuman.offsetWidth;
     const characterOffset = window.innerWidth / 2;
+    const offsetAdjustment = characterWidth; // Adjust by character width for accurate positioning
     if (characterPosition < characterOffset) {
       characterImage.style.transform = "scaleX(1)";
       setElementStyles(chatBox, {
-        left: `${characterWidth / 2}px`,
+        left: `${characterWidth / 2 + offsetAdjustment}px`,
         transform: 'translateX(0)'
       });
       setElementStyles(voiceButton, {
@@ -73,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       characterImage.style.transform = "scaleX(-1)";
       setElementStyles(chatBox, {
-        left: `${-characterWidth / 2}px`,
+        left: `${-characterWidth / 2 - offsetAdjustment}px`,
         transform: 'translateX(0)'
       });
       setElementStyles(voiceButton, {
