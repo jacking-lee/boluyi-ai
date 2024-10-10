@@ -293,4 +293,88 @@ document.addEventListener("DOMContentLoaded", () => {
       element.style[property] = styles[property];
     }
   }
+
+  // New section for version v1.20: virtual human library and customization
+  const virtualHumanSelection = document.getElementById("virtual-human-selection");
+  setElementStyles(virtualHumanSelection, {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '20px'
+  });
+
+  // Allow users to select virtual humans and customize
+  const availableCharacters = ["character1.png", "character2.png", "character3.png"];
+  availableCharacters.forEach(characterSrc => {
+    const characterOption = document.createElement('img');
+    characterOption.src = characterSrc;
+    characterOption.classList.add('character-option');
+    setElementStyles(characterOption, {
+      width: '80px',
+      height: 'auto',
+      cursor: 'pointer'
+    });
+    virtualHumanSelection.appendChild(characterOption);
+
+    characterOption.addEventListener('click', () => {
+      characterImage.src = characterSrc;
+    });
+  });
+
+  // Add voice selection feature
+  const voiceOptions = [
+    { name: "Voice 1", lang: "en-US" },
+    { name: "Voice 2", lang: "zh-CN" },
+    { name: "Voice 3", lang: "fr-FR" }
+  ];
+
+  const voiceSelect = document.createElement('select');
+  voiceOptions.forEach(voiceOption => {
+    const option = document.createElement('option');
+    option.value = voiceOption.lang;
+    option.innerText = voiceOption.name;
+    voiceSelect.appendChild(option);
+  });
+  virtualHumanSelection.appendChild(voiceSelect);
+
+  voiceSelect.addEventListener('change', (e) => {
+    recognition.lang = e.target.value;
+  });
+
+  // Share QR code feature
+  const shareButton = document.createElement('button');
+  shareButton.innerText = "分享二维码";
+  setElementStyles(shareButton, {
+    padding: '10px 20px',
+    fontSize: '14px',
+    borderRadius: '5px',
+    cursor: 'pointer'
+  });
+  virtualHumanSelection.appendChild(shareButton);
+
+  shareButton.addEventListener('click', () => {
+    const qrCodeImage = document.createElement('img');
+    qrCodeImage.src = "qrcode.png"; // This should be replaced with a real QR code generation process
+    setElementStyles(qrCodeImage, {
+      width: '150px',
+      height: '150px'
+    });
+    virtualHumanSelection.appendChild(qrCodeImage);
+  });
+
+  // Add functionality to share the digital human to WeChat Mini Program
+  const wechatButton = document.createElement('button');
+  wechatButton.innerText = "微信小程序增加数字形象";
+  setElementStyles(wechatButton, {
+    padding: '10px 20px',
+    fontSize: '14px',
+    borderRadius: '5px',
+    cursor: 'pointer'
+  });
+  virtualHumanSelection.appendChild(wechatButton);
+
+  wechatButton.addEventListener('click', () => {
+    alert('数字形象已添加到微信小程序中。');
+  });
 });
