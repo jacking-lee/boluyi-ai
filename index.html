@@ -2,20 +2,22 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>浮动数字人 - Boluyi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Human Selection - v1.20</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="digital-human" style="position: fixed; bottom: 20px; right: 20px; background: transparent; border: none; border-radius: 15px; padding: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); width: 150px; text-align: center; z-index: 9999; cursor: move;">
-    <img id="character-image" src="boluyi.png" alt="Boluyi" style="width: 100px; height: auto; border-radius: 50%;" />
-    <div id="chat-box">
-      <p id="output-text">你好，我是布鲁伊，可以帮你做什么呢？</p>
-    </div>
-    <img id="voice-button" src="microphone-on.png" alt="Microphone" />
-    
+  <div id="digital-human">
+    <img id="character-image" src="boluyi.png" alt="Character">
+    <div id="chat-box">抱歉，我不太理解你说的是什么。</div>
+    <img id="voice-button" src="microphone-off.png" alt="Voice Control">
   </div>
 
-  <script type="module" src="floatingDigitalHuman.js"></script>
+  <!-- Virtual Human Library for Version v1.20 -->
+  <div id="virtual-human-selection">
+    <h2>选择虚拟人和声音风格</h2>
+  </div>
+
+  <script src="floatingDigitalHuman.js"></script>
 </body>
 </html>
