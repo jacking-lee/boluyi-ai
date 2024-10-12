@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.character-card {
+    margin: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fefefe;
+    display: inline-block;
+    text-align: center;
+}
+
+.customize-button {
+    margin-top: 10px;
+    padding: 8px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.customize-button:hover {
+    background-color: #0056b3;
+}
+
+#characterCustomization, #productCustomization, #interactionSection, #qrCodeGeneration {
+    margin: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+#qr-code {
+    padding: 20px;
+    margin-top: 10px;
+    border: 1px dashed #aaa;
+    background-color: #fff;
+    text-align: center;
+}
