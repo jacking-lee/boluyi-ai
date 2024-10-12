@@ -28,15 +28,24 @@ characterCards.forEach(card => {
 const showCharacterDetails = (characterName) => {
   const dialog = document.createElement('div');
   dialog.classList.add('dialog');
+  dialog.setAttribute('tabindex', '0'); // 使弹窗可通过键盘访问
   dialog.innerHTML = `
     <h3>角色详情</h3>
     <p>角色名称: ${characterName}</p>
     <button id="close-dialog">关闭</button>
   `;
   document.body.appendChild(dialog);
+  dialog.focus();
 
   document.getElementById('close-dialog').addEventListener('click', () => {
     document.body.removeChild(dialog);
+  });
+
+  // 按下 Esc 键时关闭弹窗
+  dialog.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      document.body.removeChild(dialog);
+    }
   });
 };
 
@@ -205,6 +214,10 @@ styles.textContent = `
     border: 1px solid #ddd;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+  }
+
+  .dialog:focus {
+    outline: none;
   }
 `;
 document.head.appendChild(styles);
