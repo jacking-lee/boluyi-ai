@@ -121,6 +121,7 @@ dialButton?.addEventListener('click', () => {
   console.log('开始拨号');
   // 显示拨号界面
   navigateToPage('calling');
+  setupAudioVideoElements();
 });
 
 const hangUpButton = document.getElementById('hang-up-button');
@@ -142,6 +143,12 @@ const navigateToPage = (pageId) => {
   if (targetPage) {
     targetPage.style.display = 'block';
   }
+};
+
+// 设置拨号页面音频/视频组件
+const setupAudioVideoElements = () => {
+  console.log('设置音频/视频组件');
+  // 这里添加设置音频/视频组件的逻辑，例如初始化音频和视频元素
 };
 
 // 样式部分
