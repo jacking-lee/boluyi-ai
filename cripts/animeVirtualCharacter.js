@@ -20,9 +20,25 @@ characterCards.forEach(card => {
     if (!checkCredentials()) return;
     console.log(`选择了角色: ${card.querySelector('p').textContent}`);
     // 显示角色详细信息弹窗
-    navigateToPage('characterDetails');
+    showCharacterDetails(card.querySelector('p').textContent);
   });
 });
+
+// 显示角色详细信息弹窗
+const showCharacterDetails = (characterName) => {
+  const dialog = document.createElement('div');
+  dialog.classList.add('dialog');
+  dialog.innerHTML = `
+    <h3>角色详情</h3>
+    <p>角色名称: ${characterName}</p>
+    <button id="close-dialog">关闭</button>
+  `;
+  document.body.appendChild(dialog);
+
+  document.getElementById('close-dialog').addEventListener('click', () => {
+    document.body.removeChild(dialog);
+  });
+};
 
 // 角色定制功能
 const customizeButtons = document.querySelectorAll('.customize-button');
