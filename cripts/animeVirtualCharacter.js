@@ -58,8 +58,14 @@ customizeButtons.forEach(button => {
     console.log(`开始定制角色: ${characterName}`);
     // 显示角色定制界面
     navigateToPage('characterCustomization');
+    populateCustomizationPage(characterName);
   });
 });
+
+// 填充角色定制页面
+const populateCustomizationPage = (characterName) => {
+  document.getElementById('customization-character-name').textContent = `定制角色: ${characterName}`;
+};
 
 // 角色定制参数
 const characterVoiceSelect = document.getElementById('character-voice');
@@ -142,6 +148,7 @@ const navigateToPage = (pageId) => {
   const targetPage = document.getElementById(pageId);
   if (targetPage) {
     targetPage.style.display = 'block';
+    targetPage.focus(); // 页面获取焦点
   }
 };
 
