@@ -57,105 +57,54 @@ customizeButtons.forEach(button => {
     const characterName = button.parentNode.querySelector('p').textContent;
     console.log(`开始定制角色: ${characterName}`);
     // 显示角色定制界面
-    navigateToPage('characterCustomization');
-    populateCustomizationPage(characterName);
+    showCharacterCustomization(characterName);
   });
 });
 
-// 填充角色定制页面
-const populateCustomizationPage = (characterName) => {
-  document.getElementById('customization-character-name').textContent = `定制角色: ${characterName}`;
-};
+// 显示角色定制界面
+const showCharacterCustomization = (characterName) => {
+  const customizationDialog = document.createElement('div');
+  customizationDialog.classList.add('dialog');
+  customizationDialog.setAttribute('tabindex', '0');
+  customizationDialog.innerHTML = `
+    <h3>定制角色: ${characterName}</h3>
+    <label for="character-voice">声音风格:</label>
+    <select id="character-voice">
+      <option value="温柔">温柔</option>
+      <option value="严肃">严肃</option>
+      <option value="活泼">活泼</option>
+    </select>
+    <br>
+    <label for="character-outfit">服装风格:</label>
+    <select id="character-outfit">
+      <option value="现代">现代</option>
+      <option value="古典">古典</option>
+      <option value="运动">运动</option>
+    </select>
+    <br>
+    <button id="save-customization">保存定制</button>
+    <button id="close-customization-dialog">关闭</button>
+  `;
+  document.body.appendChild(customizationDialog);
+  customizationDialog.focus();
 
-// 角色定制参数
-const characterVoiceSelect = document.getElementById('character-voice');
-characterVoiceSelect?.addEventListener('change', (event) => {
-  if (!checkCredentials()) return;
-  console.log(`选择了声音风格: ${event.target.value}`);
-});
-
-const characterOutfitSelect = document.getElementById('character-outfit');
-characterOutfitSelect?.addEventListener('change', (event) => {
-  if (!checkCredentials()) return;
-  console.log(`选择了服装风格: ${event.target.value}`);
-});
-
-// 产品定制功能
-const productTypeSelect = document.getElementById('product-type');
-productTypeSelect?.addEventListener('change', (event) => {
-  if (!checkCredentials()) return;
-  console.log(`选择了产品类型: ${event.target.value}`);
-});
-
-const productSizeInput = document.getElementById('product-size');
-productSizeInput?.addEventListener('input', (event) => {
-  if (!checkCredentials()) return;
-  console.log(`输入的产品尺寸: ${event.target.value}`);
-});
-
-// 数字互动与视频生成
-const createVideoButton = document.getElementById('create-video');
-createVideoButton?.addEventListener('click', () => {
-  if (!checkCredentials()) return;
-  console.log('生成互动视频');
-  // 显示生成视频界面
-  navigateToPage('videoCreation');
-});
-
-const startInteractionButton = document.getElementById('start-interaction');
-startInteractionButton?.addEventListener('click', () => {
-  if (!checkCredentials()) return;
-  console.log('开始数字互动');
-  // 显示互动界面
-  navigateToPage('interaction');
-});
-
-// 生成二维码与分享
-const generateQrButton = document.getElementById('generate-qr');
-generateQrButton?.addEventListener('click', () => {
-  if (!checkCredentials()) return;
-  console.log('生成二维码');
-  // 显示二维码生成界面
-  document.getElementById('qr-code').textContent = '二维码生成成功';
-  navigateToPage('qrCodeGeneration');
-});
-
-// 拨号与挂断功能
-const dialButton = document.getElementById('dial-button');
-dialButton?.addEventListener('click', () => {
-  if (!checkCredentials()) return;
-  console.log('开始拨号');
-  // 显示拨号界面
-  navigateToPage('calling');
-  setupAudioVideoElements();
-});
-
-const hangUpButton = document.getElementById('hang-up-button');
-hangUpButton?.addEventListener('click', () => {
-  if (!checkCredentials()) return;
-  console.log('挂断通话');
-  // 返回到互动界面
-  navigateToPage('interaction');
-});
-
-// 页面跳转功能
-const navigateToPage = (pageId) => {
-  console.log(`跳转到页面: ${pageId}`);
-  // 使用 display 样式控制页面跳转逻辑
-  document.querySelectorAll('.page').forEach(page => {
-    page.style.display = 'none';
+  document.getElementById('close-customization-dialog').addEventListener('click', () => {
+    document.body.removeChild(customizationDialog);
   });
-  const targetPage = document.getElementById(pageId);
-  if (targetPage) {
-    targetPage.style.display = 'block';
-    targetPage.focus(); // 页面获取焦点
-  }
-};
 
-// 设置拨号页面音频/视频组件
-const setupAudioVideoElements = () => {
-  console.log('设置音频/视频组件');
-  // 这里添加设置音频/视频组件的逻辑，例如初始化音频和视频元素
+  document.getElementById('save-customization').addEventListener('click', () => {
+    const voice = document.getElementById('character-voice').value;
+    const outfit = document.getElementById('character-outfit').value;
+    console.log(`保存定制: 角色名称: ${characterName}, 声音风格: ${voice}, 服装风格: ${outfit}`);
+    document.body.removeChild(customizationDialog);
+  });
+
+  // 按下 Esc 键时关闭弹窗
+  customizationDialog.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      document.body.removeChild(customizationDialog);
+    }
+  });
 };
 
 // 样式部分
@@ -174,24 +123,8 @@ styles.textContent = `
     cursor: pointer;
   }
 
-  #qr-code {
-    padding: 20px;
-    margin-top: 10px;
-    border: 1px dashed #aaa;
-    background-color: #fff;
-    text-align: center;
-  }
-
   .page {
     display: none;
-  }
-
-  #character-selection, #characterDetails, #characterCustomization, #productCustomization, #videoCreation, #interaction, #qrCodeGeneration, #calling {
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    margin: 20px;
   }
 
   #character-selection {
@@ -237,4 +170,4 @@ styles.textContent = `
 document.head.appendChild(styles);
 
 // 默认显示角色选择页面
-navigateToPage('character-selection');
+document.getElementById('character-selection').style.display = 'block';
