@@ -38,33 +38,33 @@ customizeButtons.forEach(button => {
 
 // 角色定制参数
 const characterVoiceSelect = document.getElementById('character-voice');
-characterVoiceSelect.addEventListener('change', (event) => {
+characterVoiceSelect?.addEventListener('change', (event) => {
   if (!checkCredentials()) return;
   console.log(`选择了声音风格: ${event.target.value}`);
 });
 
 const characterOutfitSelect = document.getElementById('character-outfit');
-characterOutfitSelect.addEventListener('change', (event) => {
+characterOutfitSelect?.addEventListener('change', (event) => {
   if (!checkCredentials()) return;
   console.log(`选择了服装风格: ${event.target.value}`);
 });
 
 // 产品定制功能
 const productTypeSelect = document.getElementById('product-type');
-productTypeSelect.addEventListener('change', (event) => {
+productTypeSelect?.addEventListener('change', (event) => {
   if (!checkCredentials()) return;
   console.log(`选择了产品类型: ${event.target.value}`);
 });
 
 const productSizeInput = document.getElementById('product-size');
-productSizeInput.addEventListener('input', (event) => {
+productSizeInput?.addEventListener('input', (event) => {
   if (!checkCredentials()) return;
   console.log(`输入的产品尺寸: ${event.target.value}`);
 });
 
 // 数字互动与视频生成
 const createVideoButton = document.getElementById('create-video');
-createVideoButton.addEventListener('click', () => {
+createVideoButton?.addEventListener('click', () => {
   if (!checkCredentials()) return;
   console.log('生成互动视频');
   // 这里调用生成视频的相关接口或功能
@@ -72,7 +72,7 @@ createVideoButton.addEventListener('click', () => {
 });
 
 const startInteractionButton = document.getElementById('start-interaction');
-startInteractionButton.addEventListener('click', () => {
+startInteractionButton?.addEventListener('click', () => {
   if (!checkCredentials()) return;
   console.log('开始数字互动');
   // 这里调用开始互动的相关逻辑
@@ -81,7 +81,7 @@ startInteractionButton.addEventListener('click', () => {
 
 // 生成二维码与分享
 const generateQrButton = document.getElementById('generate-qr');
-generateQrButton.addEventListener('click', () => {
+generateQrButton?.addEventListener('click', () => {
   if (!checkCredentials()) return;
   console.log('生成二维码');
   // 这里调用二维码生成的逻辑，展示在 qr-code 区域
@@ -89,17 +89,40 @@ generateQrButton.addEventListener('click', () => {
   navigateToPage('qrCodeGeneration');
 });
 
+// 拨号与挂断功能
+const dialButton = document.getElementById('dial-button');
+dialButton?.addEventListener('click', () => {
+  if (!checkCredentials()) return;
+  console.log('开始拨号');
+  // 这里调用拨号的相关逻辑
+  navigateToPage('calling');
+});
+
+const hangUpButton = document.getElementById('hang-up-button');
+hangUpButton?.addEventListener('click', () => {
+  if (!checkCredentials()) return;
+  console.log('挂断通话');
+  // 这里调用挂断的相关逻辑
+  navigateToPage('interaction');
+});
+
 // 页面跳转功能
 const navigateToPage = (pageId) => {
   console.log(`跳转到页面: ${pageId}`);
-  // 这里实现页面之间的跳转逻辑
-  document.getElementById(pageId).scrollIntoView({ behavior: 'smooth' });
+  // 使用 display 样式控制页面跳转逻辑
+  document.querySelectorAll('.page').forEach(page => {
+    page.style.display = 'none';
+  });
+  const targetPage = document.getElementById(pageId);
+  if (targetPage) {
+    targetPage.style.display = 'block';
+  }
 };
 
 // 样式部分
 const styles = document.createElement('style');
 styles.textContent = `
-  .character-card, .customize-button, #character-voice, #character-outfit, #product-type, #product-size, #create-video, #start-interaction, #generate-qr {
+  .character-card, .customize-button, #character-voice, #character-outfit, #product-type, #product-size, #create-video, #start-interaction, #generate-qr, #dial-button, #hang-up-button {
     margin: 10px;
     padding: 10px;
     border-radius: 5px;
@@ -107,7 +130,7 @@ styles.textContent = `
     border: 1px solid #ccc;
   }
 
-  .character-card:hover, .customize-button:hover, #create-video:hover, #start-interaction:hover, #generate-qr:hover {
+  .character-card:hover, .customize-button:hover, #create-video:hover, #start-interaction:hover, #generate-qr:hover, #dial-button:hover, #hang-up-button:hover {
     background-color: #e0e0e0;
     cursor: pointer;
   }
@@ -119,5 +142,20 @@ styles.textContent = `
     background-color: #fff;
     text-align: center;
   }
+
+  .page {
+    display: none;
+  }
+
+  #characterDetails, #characterCustomization, #productCustomization, #videoCreation, #interaction, #qrCodeGeneration, #calling {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin: 20px;
+  }
 `;
 document.head.appendChild(styles);
+
+// 默认显示第一个页面
+navigateToPage('character-selection');
