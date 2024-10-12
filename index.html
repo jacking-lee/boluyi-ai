@@ -1,23 +1,68 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Virtual Human Selection - v1.20</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Virtual Character Platform</title>
+    <!-- 引入主样式文件 -->
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-  <div id="digital-human">
-    <img id="character-image" src="boluyi.png" alt="Character">
-    <div id="chat-box">抱歉，我不太理解你说的是什么。</div>
-    <img id="voice-button" src="microphone-off.png" alt="Voice Control">
-  </div>
+    <!-- 角色选择部分 -->
+    <div id="character-selection">
+        <div class="character-card">
+            <img src="images/character1.png" alt="Character 1">
+            <p>角色1</p>
+            <button class="customize-button">定制角色</button>
+        </div>
+        <div class="character-card">
+            <img src="images/character2.png" alt="Character 2">
+            <p>角色2</p>
+            <button class="customize-button">定制角色</button>
+        </div>
+        <!-- 更多角色 -->
+    </div>
 
-  <!-- Virtual Human Library for Version v1.20 -->
-  <div id="virtual-human-selection">
-    <h2>选择虚拟人和声音风格</h2>
-  </div>
+    <!-- 角色定制界面 -->
+    <div id="characterCustomization" style="display: none;">
+        <label for="character-voice">声音风格选择：</label>
+        <select id="character-voice">
+            <option value="style1">风格 1</option>
+            <option value="style2">风格 2</option>
+        </select>
 
-  <script src="floatingDigitalHuman.js"></script>
+        <label for="character-outfit">服装风格选择：</label>
+        <select id="character-outfit">
+            <option value="outfit1">服装 1</option>
+            <option value="outfit2">服装 2</option>
+        </select>
+    </div>
+
+    <!-- 产品定制界面 -->
+    <div id="productCustomization" style="display: none;">
+        <label for="product-type">产品类型选择：</label>
+        <select id="product-type">
+            <option value="product1">产品 1</option>
+            <option value="product2">产品 2</option>
+        </select>
+
+        <label for="product-size">产品尺寸输入：</label>
+        <input type="text" id="product-size">
+    </div>
+
+    <!-- 数字互动和视频生成 -->
+    <div id="interactionSection" style="display: none;">
+        <button id="create-video">生成互动视频</button>
+        <button id="start-interaction">开始互动</button>
+    </div>
+
+    <!-- 二维码生成部分 -->
+    <div id="qrCodeGeneration" style="display: none;">
+        <button id="generate-qr">生成二维码</button>
+        <div id="qr-code"></div>
+    </div>
+
+    <!-- 引入主JS文件 -->
+    <script src="scripts/animeVirtualCharacter.js"></script>
 </body>
 </html>
