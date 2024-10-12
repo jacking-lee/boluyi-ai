@@ -159,15 +159,36 @@ styles.textContent = `
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
   }
 
   .character-card {
     width: 150px;
     text-align: center;
+    border: 2px solid #007bff;
+    padding: 15px;
+    transition: transform 0.3s;
+  }
+
+  .character-card:hover {
+    transform: scale(1.05);
   }
 
   .customize-button {
     margin-top: 10px;
+  }
+
+  .dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
   }
 `;
 document.head.appendChild(styles);
