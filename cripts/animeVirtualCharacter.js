@@ -19,7 +19,7 @@ characterCards.forEach(card => {
   card.addEventListener('click', () => {
     if (!checkCredentials()) return;
     console.log(`选择了角色: ${card.querySelector('p').textContent}`);
-    // 这里可以调用角色的详细展示页面
+    // 显示角色详细信息弹窗
     navigateToPage('characterDetails');
   });
 });
@@ -31,7 +31,7 @@ customizeButtons.forEach(button => {
     if (!checkCredentials()) return;
     const characterName = button.parentNode.querySelector('p').textContent;
     console.log(`开始定制角色: ${characterName}`);
-    // 这里调用角色定制的界面逻辑
+    // 显示角色定制界面
     navigateToPage('characterCustomization');
   });
 });
@@ -67,7 +67,7 @@ const createVideoButton = document.getElementById('create-video');
 createVideoButton?.addEventListener('click', () => {
   if (!checkCredentials()) return;
   console.log('生成互动视频');
-  // 这里调用生成视频的相关接口或功能
+  // 显示生成视频界面
   navigateToPage('videoCreation');
 });
 
@@ -75,7 +75,7 @@ const startInteractionButton = document.getElementById('start-interaction');
 startInteractionButton?.addEventListener('click', () => {
   if (!checkCredentials()) return;
   console.log('开始数字互动');
-  // 这里调用开始互动的相关逻辑
+  // 显示互动界面
   navigateToPage('interaction');
 });
 
@@ -84,7 +84,7 @@ const generateQrButton = document.getElementById('generate-qr');
 generateQrButton?.addEventListener('click', () => {
   if (!checkCredentials()) return;
   console.log('生成二维码');
-  // 这里调用二维码生成的逻辑，展示在 qr-code 区域
+  // 显示二维码生成界面
   document.getElementById('qr-code').textContent = '二维码生成成功';
   navigateToPage('qrCodeGeneration');
 });
@@ -94,7 +94,7 @@ const dialButton = document.getElementById('dial-button');
 dialButton?.addEventListener('click', () => {
   if (!checkCredentials()) return;
   console.log('开始拨号');
-  // 这里调用拨号的相关逻辑
+  // 显示拨号界面
   navigateToPage('calling');
 });
 
@@ -102,7 +102,7 @@ const hangUpButton = document.getElementById('hang-up-button');
 hangUpButton?.addEventListener('click', () => {
   if (!checkCredentials()) return;
   console.log('挂断通话');
-  // 这里调用挂断的相关逻辑
+  // 返回到互动界面
   navigateToPage('interaction');
 });
 
@@ -147,15 +147,30 @@ styles.textContent = `
     display: none;
   }
 
-  #characterDetails, #characterCustomization, #productCustomization, #videoCreation, #interaction, #qrCodeGeneration, #calling {
+  #character-selection, #characterDetails, #characterCustomization, #productCustomization, #videoCreation, #interaction, #qrCodeGeneration, #calling {
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
     border: 1px solid #ddd;
     margin: 20px;
   }
+
+  #character-selection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .character-card {
+    width: 150px;
+    text-align: center;
+  }
+
+  .customize-button {
+    margin-top: 10px;
+  }
 `;
 document.head.appendChild(styles);
 
-// 默认显示第一个页面
+// 默认显示角色选择页面
 navigateToPage('character-selection');
